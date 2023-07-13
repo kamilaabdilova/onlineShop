@@ -1,6 +1,6 @@
 package com.example.onlineshop.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,12 +21,10 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @OneToOne
-            @Column(name = "user")
     User user;
     @Column(name = "productList")
     @OneToMany
     List<Product> productList;
-    @Column(name = "order")
     @OneToOne
     Order order;
 }

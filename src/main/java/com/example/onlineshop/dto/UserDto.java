@@ -1,6 +1,6 @@
 package com.example.onlineshop.dto;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

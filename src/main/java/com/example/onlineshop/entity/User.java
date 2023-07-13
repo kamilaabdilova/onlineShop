@@ -1,18 +1,20 @@
 package com.example.onlineshop.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Collection;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "user")
+@Table(name = "use")
 public class User {
 
     @Id
@@ -22,4 +24,14 @@ public class User {
     String email;
     @Column(name = "password", nullable = false)
     String password;
+    @Column
+    String username;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    Collection<Role> roles;
 }
