@@ -11,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "user")
 public class UserDto {
 
 

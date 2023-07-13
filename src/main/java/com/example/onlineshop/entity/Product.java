@@ -1,15 +1,13 @@
 package com.example.onlineshop.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
@@ -19,7 +17,6 @@ public class Product {
     @Column(name = "price", nullable = false)
     Double price;
     @Column(name = "image")
-
     String image;
     @Column(name = "description")
     String description;

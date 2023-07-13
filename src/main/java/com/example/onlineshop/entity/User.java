@@ -1,15 +1,13 @@
 package com.example.onlineshop.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "user")
@@ -18,8 +16,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", unique = true)
     String email;
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     String password;
 }
