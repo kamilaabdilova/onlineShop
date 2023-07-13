@@ -1,7 +1,6 @@
 package com.example.onlineshop.config;
 
 import com.example.onlineshop.service.impl.UserServiceIml;
-import com.example.onlineshop.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
