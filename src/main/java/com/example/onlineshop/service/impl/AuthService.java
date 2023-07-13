@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final UserService userService;
+    private final UserServiceIml userService;
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
 

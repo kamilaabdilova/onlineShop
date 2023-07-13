@@ -3,6 +3,7 @@ package com.example.onlineshop.service.impl;
 import com.example.onlineshop.dto.RegistrationUserDto;
 import com.example.onlineshop.entity.User;
 import com.example.onlineshop.repositories.UserRepo;
+import com.example.onlineshop.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,25 +18,27 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
-    private UserRepo userRepo;
+
+public class UserServiceIml implements UserDetailsService {
+    private UserRepo userRepository;
     private RoleService roleService;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public void setUserRepository(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public void setUserRepository(UserRepo userRepository) {
+        this.userRepository = userRepository;
     }
     @Autowired
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
     }
+    @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
     public Optional<User> findByUsername(String username){
-        return userRepo.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -50,12 +53,13 @@ public class UserService implements UserDetailsService {
                 user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList())
         );
     }
-    public User createNewUser(RegistrationUserDto registrationUserDto) {
+    public User createNewUser(RegistrationUserDto registrationUserDto){
         User user = new User();
         user.setUsername(registrationUserDto.getUsername());
         user.setEmail(registrationUserDto.getEmail());
         user.setPassword(passwordEncoder.encode(registrationUserDto.getPassword()));
         user.setRoles(List.of(roleService.getUserRole()));
-        return userRepo.save(user);
+        return userRepository.save(user);
+
     }
 }

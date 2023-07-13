@@ -1,6 +1,7 @@
 package com.example.onlineshop.config;
 
-import com.example.onlineshop.service.impl.UserService;
+import com.example.onlineshop.service.impl.UserServiceIml;
+import com.example.onlineshop.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private UserService userService;
+    private UserServiceIml userService;
 
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(UserServiceIml userService) {
         this.userService = userService;
     }
 
