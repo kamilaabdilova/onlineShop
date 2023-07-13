@@ -1,6 +1,6 @@
 package com.example.onlineshop.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "orde")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

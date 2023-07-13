@@ -6,7 +6,7 @@ import com.example.onlineshop.exception.RecordNotFoundException;
 import com.example.onlineshop.mapper.BrandMapper;
 import com.example.onlineshop.repositories.BrandRepo;
 import com.example.onlineshop.service.BrandService;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -6,10 +6,10 @@ import com.example.onlineshop.exception.RecordNotFoundException;
 import com.example.onlineshop.mapper.BasketMapper;
 import com.example.onlineshop.repositories.BasketRepo;
 import com.example.onlineshop.service.BasketService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
