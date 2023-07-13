@@ -6,13 +6,11 @@ import com.example.onlineshop.exception.RecordNotFoundException;
 import com.example.onlineshop.mapper.CategoryMapper;
 import com.example.onlineshop.repositories.CategoryRepo;
 import com.example.onlineshop.service.CategoryService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class CategoryImpl implements CategoryService {
     private final CategoryRepo categoryRepo;

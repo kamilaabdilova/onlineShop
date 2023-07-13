@@ -6,14 +6,12 @@ import com.example.onlineshop.exception.RecordNotFoundException;
 import com.example.onlineshop.mapper.BrandMapper;
 import com.example.onlineshop.repositories.BrandRepo;
 import com.example.onlineshop.service.BrandService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
 

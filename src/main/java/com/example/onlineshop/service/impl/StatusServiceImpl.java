@@ -6,13 +6,11 @@ import com.example.onlineshop.exception.RecordNotFoundException;
 import com.example.onlineshop.mapper.StatusMapper;
 import com.example.onlineshop.repositories.StatusRepo;
 import com.example.onlineshop.service.StatusService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class StatusServiceImpl implements StatusService {
     private final StatusRepo statusRepo;

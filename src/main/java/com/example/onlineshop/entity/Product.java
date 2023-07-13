@@ -1,8 +1,8 @@
 package com.example.onlineshop.entity;
-
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +20,8 @@ public class Product {
     String image;
     @Column(name = "description")
     String description;
+    @OneToOne()
+    @PrimaryKeyJoinColumn
+    Status status;
 
 }

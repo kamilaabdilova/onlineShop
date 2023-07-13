@@ -1,9 +1,10 @@
 package com.example.onlineshop.entity;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,14 +20,12 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @OneToOne
-//    @Column(name = "user")
     @PrimaryKeyJoinColumn
     User user;
     @Column(name = "productList")
     @OneToMany
     List<Product> productList;
     @OneToOne
-//    @Column(name = "order")
     @PrimaryKeyJoinColumn
     Order order;
 }

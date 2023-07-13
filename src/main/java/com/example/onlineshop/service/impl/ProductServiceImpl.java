@@ -6,13 +6,12 @@ import com.example.onlineshop.exception.RecordNotFoundException;
 import com.example.onlineshop.mapper.ProductMapper;
 import com.example.onlineshop.repositories.ProductRepo;
 import com.example.onlineshop.service.ProductService;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepo productRepo;
@@ -47,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteOrder(Long id) {
+    public void deleteProduct(Long id) {
         Product product = this.productRepo.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Продукта с таким id не существует!"));
         productRepo.deleteById(product.getId());

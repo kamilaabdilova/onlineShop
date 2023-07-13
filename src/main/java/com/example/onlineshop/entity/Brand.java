@@ -1,8 +1,8 @@
 package com.example.onlineshop.entity;
-
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,4 +16,5 @@ public class Brand {
     Long id;
     @Column(name = "nameBrand")
     String nameBrand;
+
 }
