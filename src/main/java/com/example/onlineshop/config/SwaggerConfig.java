@@ -10,8 +10,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
-    public static final String USER = "Пользователь";
     public static final String BASKET = "Корзина";
+    public static final String BRAND = "Бренд";
+    public static final String CATEGORY = "Категория";
+    public static final String ORDER = "Заказ";
+    public static final String PRODUCT = "Продукт";
+    public static final String STATUS = "Статус";
+    public static final String USER = "Пользователь";
 
     @Bean
     public Docket api() {

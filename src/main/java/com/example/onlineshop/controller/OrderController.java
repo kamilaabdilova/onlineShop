@@ -4,10 +4,15 @@ package com.example.onlineshop.controller;
 import com.example.onlineshop.dto.OrderDto;
 
 import com.example.onlineshop.service.OrderService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.onlineshop.config.SwaggerConfig.ORDER;
+
+@Api(tags = ORDER)
 @AllArgsConstructor
 @RestController
 @RequestMapping("/order")

@@ -3,10 +3,15 @@ package com.example.onlineshop.controller;
 
 import com.example.onlineshop.dto.CategoryDto;
 import com.example.onlineshop.service.CategoryService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.onlineshop.config.SwaggerConfig.CATEGORY;
+
+@Api(tags = CATEGORY)
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")
