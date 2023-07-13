@@ -4,10 +4,15 @@ package com.example.onlineshop.controller;
 import com.example.onlineshop.dto.ProductDto;
 
 import com.example.onlineshop.service.ProductService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.onlineshop.config.SwaggerConfig.PRODUCT;
+
+@Api(tags = PRODUCT)
 @AllArgsConstructor
 @RestController
 @RequestMapping("/product")

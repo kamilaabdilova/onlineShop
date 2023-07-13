@@ -3,11 +3,15 @@ package com.example.onlineshop.controller;
 
 import com.example.onlineshop.dto.BrandDto;
 import com.example.onlineshop.service.BrandService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.example.onlineshop.config.SwaggerConfig.BRAND;
+
+@Api(tags = BRAND)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/brand")
