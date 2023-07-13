@@ -1,5 +1,6 @@
 package com.example.onlineshop.entity;
 import lombok.*;
+
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;

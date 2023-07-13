@@ -1,7 +1,9 @@
 package com.example.onlineshop.entity;
 
 
+
 import lombok.*;
+
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -20,7 +22,9 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @OneToOne
+
     @PrimaryKeyJoinColumn
+
     User user;
     @Column(name = "productList")
     @OneToMany

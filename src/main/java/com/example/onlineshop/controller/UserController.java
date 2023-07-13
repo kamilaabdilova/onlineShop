@@ -1,6 +1,5 @@
 package com.example.onlineshop.controller;
 
-
 import com.example.onlineshop.dto.UserDto;
 import com.example.onlineshop.service.UserService;
 import io.swagger.annotations.Api;
@@ -12,9 +11,11 @@ import java.util.List;
 import static com.example.onlineshop.config.SwaggerConfig.BASKET;
 @AllArgsConstructor
 @Api(tags = BASKET)
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     private final UserService userService;
     @PostMapping("/save")
     public UserDto saveUser(@RequestBody UserDto userDto){
@@ -31,5 +32,26 @@ public class UserController {
     @DeleteMapping("/delete")
     public void deleteBasket(@RequestParam Long id){
         userService.deleteUser(id);
-    }
-}
+
+
+//    @GetMapping("/unsecured")
+//    public String unsecuredData(){
+//        return "Unsecured Data";
+//    }
+//
+//    @GetMapping("/secured")
+//    public String securedData(){
+//        return "Secured Data";
+//    }
+//
+//    @GetMapping("/admin")
+//    public String adminData(){
+//        return "Admin Data";
+//    }
+//
+//    @GetMapping("/info")
+//    public String userData(Principal principal){
+//        return principal.getName();
+//
+//    }
+}}

@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+
 public class BrandServiceImpl implements BrandService {
 
     private final BrandRepo brandRepo;
