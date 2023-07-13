@@ -30,6 +30,6 @@ public class BasketController {
     }
     @DeleteMapping("/delete")
     public void deleteBasket(@RequestParam Long id){
-        basketService.deleteBasket(id);
+        basketService.deleteBasket(id)  ;
     }
 }
