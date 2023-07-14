@@ -1,7 +1,7 @@
 package com.example.onlineshop.controller;
 
 import com.example.onlineshop.dto.UserDto;
-import com.example.onlineshop.service.impl.UserServiceImpl;
+import com.example.onlineshop.service.impl.UserServiceIml;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import static com.example.onlineshop.config.SwaggerConfig.BASKET;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceImpl userServiceImpl;
+    private final UserServiceIml userServiceImpl;
     @PostMapping("/save")
     public UserDto saveUser(@RequestBody UserDto userDto){
 

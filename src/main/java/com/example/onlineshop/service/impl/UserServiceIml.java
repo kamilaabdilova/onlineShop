@@ -1,7 +1,10 @@
 package com.example.onlineshop.service.impl;
 
 import com.example.onlineshop.dto.RegistrationUserDto;
+import com.example.onlineshop.dto.UserDto;
 import com.example.onlineshop.entity.User;
+import com.example.onlineshop.exception.RecordNotFoundException;
+import com.example.onlineshop.mapper.UserMapper;
 import com.example.onlineshop.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -59,6 +62,43 @@ public class UserServiceIml implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(registrationUserDto.getPassword()));
         user.setRoles(List.of(roleService.getUserRole()));
         return userRepository.save(user);
-
     }
+
+    public UserDto saveUser(UserDto userDto) {
+        User user = UserMapper.INSTANCE.toEntity(userDto);
+        try {
+            User userSave = userRepository.save(user);
+            return UserMapper.INSTANCE.toDTO(userSave);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Не удалось сохранить пользователя в базе!", e);
+        }
+    }
+
+    public UserDto updateUser(UserDto userDto, long id) {
+        User user  = this.userRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Пользователя с таким id не существует!"));
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        return UserMapper.INSTANCE.toDTO(user);
+    }
+
+
+    public UserDto getUserById(Long id) {
+        User user  = this.userRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Пользователя с таким id не существует!"));
+        return UserMapper.INSTANCE.toDTO(user);
+    }
+
+    public List<UserDto> findAllUser() {
+        return UserMapper.INSTANCE.toDTOList(userRepository.findAll());
+    }
+
+    public void deleteUser(Long id) {
+        User user  = this.userRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Пользователя с таким id не существует!"));
+        userRepository.deleteById(user.getId());
+    }
+
+
 }
+
