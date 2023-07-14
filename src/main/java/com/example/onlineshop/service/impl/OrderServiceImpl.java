@@ -2,7 +2,7 @@ package com.example.onlineshop.service.impl;
 
 import com.example.onlineshop.dto.OrderDto;
 import com.example.onlineshop.entity.Order;
-import com.example.onlineshop.exception.RecordNotFoundException;
+import com.example.onlineshop.exceptions.RecordNotFoundException;
 import com.example.onlineshop.mapper.OrderMapper;
 import com.example.onlineshop.repositories.OrderRepo;
 import com.example.onlineshop.service.OrderService;

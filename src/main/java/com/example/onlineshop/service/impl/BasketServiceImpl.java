@@ -2,14 +2,13 @@ package com.example.onlineshop.service.impl;
 
 import com.example.onlineshop.dto.BasketDto;
 import com.example.onlineshop.entity.Basket;
-import com.example.onlineshop.exception.RecordNotFoundException;
+import com.example.onlineshop.exceptions.RecordNotFoundException;
 import com.example.onlineshop.mapper.BasketMapper;
 import com.example.onlineshop.repositories.BasketRepo;
 import com.example.onlineshop.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

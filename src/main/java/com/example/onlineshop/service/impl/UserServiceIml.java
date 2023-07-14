@@ -3,7 +3,6 @@ package com.example.onlineshop.service.impl;
 import com.example.onlineshop.dto.RegistrationUserDto;
 import com.example.onlineshop.entity.User;
 import com.example.onlineshop.repositories.UserRepo;
-import com.example.onlineshop.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -17,6 +17,8 @@ public class SwaggerConfig {
     public static final String PRODUCT = "Продукт";
     public static final String STATUS = "Статус";
     public static final String USER = "Пользователь";
+    public static final String AUTH = "Авторизация";
+    public static final String MAIL = "Отправка email";
 
     @Bean
     public Docket api() {
@@ -26,6 +28,13 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .tags(new Tag(USER,""))
-                .tags(new Tag(BASKET,""));
+                .tags(new Tag(BASKET,""))
+                .tags(new Tag(BRAND,""))
+                .tags(new Tag(CATEGORY,""))
+                .tags(new Tag(PRODUCT,""))
+                .tags(new Tag(ORDER,""))
+                .tags(new Tag(STATUS,""))
+                .tags(new Tag(AUTH,""))
+                .tags(new Tag(MAIL,""));
     }
 }

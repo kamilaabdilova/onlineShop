@@ -2,7 +2,7 @@ package com.example.onlineshop.service.impl;
 
 import com.example.onlineshop.dto.CategoryDto;
 import com.example.onlineshop.entity.Category;
-import com.example.onlineshop.exception.RecordNotFoundException;
+import com.example.onlineshop.exceptions.RecordNotFoundException;
 import com.example.onlineshop.mapper.CategoryMapper;
 import com.example.onlineshop.repositories.CategoryRepo;
 import com.example.onlineshop.service.CategoryService;

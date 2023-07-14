@@ -12,7 +12,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -35,6 +39,20 @@ public class SecurityConfig {
         this.jwtRequestFilter = jwtRequestFilter;
     }
 
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder){
+//        UserDetails user = User.withUsername("user")
+//                .password(passwordEncoder.encode("{bcrypt}$2a$12$CNZrlFLfM6iF1VrS.A7IFOaMT292FgRZcWL.DVl/20Sy.xrkbNBju"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User.withUsername("admin")
+//                .password(passwordEncoder.encode("{bcrypt}$2a$12$lXxdnpdtisjmL9zO6cBGf.fGZGrPWjD1bqHT9jaliry9vn5aMmX4u"))
+//                .roles("USER", "ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user,admin);
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
@@ -44,7 +62,10 @@ public class SecurityConfig {
                 .antMatchers("/secured").authenticated()
                 .antMatchers("/info").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().permitAll()
+                .antMatchers("/user")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/**")
+                .permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
