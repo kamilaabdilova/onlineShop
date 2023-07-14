@@ -7,6 +7,8 @@ import com.example.onlineshop.service.ProductService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -19,8 +21,8 @@ import static com.example.onlineshop.config.SwaggerConfig.PRODUCT;
 public class ProductController {
     private final ProductService productService;
     @PostMapping("/save")
-    public ProductDto saveProduct(@RequestBody ProductDto productDto){
-        return productService.saveProduct(productDto);
+    public ProductDto saveProduct(ProductDto productDto,@RequestPart MultipartFile file){
+        return productService.saveProduct(productDto, file);
     }
     @PutMapping("/update")
     public ProductDto updateProduct(@RequestBody ProductDto productDto, @PathVariable long id){

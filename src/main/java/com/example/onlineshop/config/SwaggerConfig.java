@@ -37,4 +37,5 @@ public class SwaggerConfig {
                 .tags(new Tag(AUTH,""))
                 .tags(new Tag(MAIL,""));
     }
+
 }

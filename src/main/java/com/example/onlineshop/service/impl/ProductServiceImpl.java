@@ -9,20 +9,38 @@ import com.example.onlineshop.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepo productRepo;
     @Override
-    public ProductDto saveProduct(ProductDto productDto) {
+    public ProductDto saveProduct(ProductDto productDto, MultipartFile file) {
         Product product = ProductMapper.INSTANCE.toEntity(productDto);
+        product.setImage(!fileDownload(file).equals("") ?fileDownload(file):"file not saved");
         try {
             Product productSave = productRepo.save(product);
             return ProductMapper.INSTANCE.toDTO(productSave);
         } catch (RuntimeException e) {
             throw new RuntimeException("Не удалось сохранить продукт в базе!", e);
+        }
+    }
+
+    private String fileDownload(MultipartFile file){
+        try {
+            File path = new File("C:\\" + file.getOriginalFilename());
+            path.createNewFile();
+            FileOutputStream output = new FileOutputStream(path);
+            output.write(file.getBytes());
+            output.close();
+            return path.getAbsolutePath();
+        }catch (Exception e){
+            e.printStackTrace();
+            return "";
         }
     }
 
