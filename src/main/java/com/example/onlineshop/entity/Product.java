@@ -1,4 +1,6 @@
 package com.example.onlineshop.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import lombok.experimental.FieldDefaults;

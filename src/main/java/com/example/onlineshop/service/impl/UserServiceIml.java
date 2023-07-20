@@ -30,16 +30,18 @@ public class UserServiceIml implements UserDetailsService {
     public void setUserRepository(UserRepo userRepository) {
         this.userRepository = userRepository;
     }
+
     @Autowired
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
     }
+
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<User> findByUsername(String username){
+    public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -55,7 +57,8 @@ public class UserServiceIml implements UserDetailsService {
                 user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList())
         );
     }
-    public User createNewUser(RegistrationUserDto registrationUserDto){
+
+    public User createNewUser(RegistrationUserDto registrationUserDto) {
         User user = new User();
         user.setUsername(registrationUserDto.getUsername());
         user.setEmail(registrationUserDto.getEmail());
@@ -75,7 +78,7 @@ public class UserServiceIml implements UserDetailsService {
     }
 
     public UserDto updateUser(UserDto userDto, long id) {
-        User user  = this.userRepository.findById(id)
+        User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Пользователя с таким id не существует!"));
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
@@ -84,7 +87,7 @@ public class UserServiceIml implements UserDetailsService {
 
 
     public UserDto getUserById(Long id) {
-        User user  = this.userRepository.findById(id)
+        User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Пользователя с таким id не существует!"));
         return UserMapper.INSTANCE.toDTO(user);
     }
@@ -94,7 +97,7 @@ public class UserServiceIml implements UserDetailsService {
     }
 
     public void deleteUser(Long id) {
-        User user  = this.userRepository.findById(id)
+        User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Пользователя с таким id не существует!"));
         userRepository.deleteById(user.getId());
     }
