@@ -1,9 +1,6 @@
 package com.example.onlineshop.service.impl;
 
-import com.example.onlineshop.dto.JwtRequest;
-import com.example.onlineshop.dto.JwtResponse;
-import com.example.onlineshop.dto.RegistrationUserDto;
-import com.example.onlineshop.dto.UserDto;
+import com.example.onlineshop.dto.*;
 import com.example.onlineshop.entity.User;
 import com.example.onlineshop.exceptions.AppError;
 import com.example.onlineshop.utils.JwtTokenUtils;
@@ -24,26 +21,41 @@ public class AuthService {
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest){
+    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        } catch (BadCredentialsException e){
-            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authRequest.getUsername(),
+                            authRequest.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>(
+                    new AppError(
+                            HttpStatus.UNAUTHORIZED.value(),
+                            "Неправильный логин или пароль"),
+                    HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtils.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUserDto){
-        if (!registrationUserDto.getPassword().equals(registrationUserDto.getConfirmPassword())){
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"),HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUserDto) {
+        if (!registrationUserDto.getPassword().equals(registrationUserDto.getConfirmPassword())) {
+            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
         }
-        if (userService.findByUsername(registrationUserDto.getUsername()).isPresent()){
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пользователь с таким именем уже существует"),HttpStatus.BAD_REQUEST);
+
+        if (userService.findByUsername(registrationUserDto.getUsername()).isPresent()) {
+            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пользователь с таким именем уже существует"), HttpStatus.BAD_REQUEST);
         }
+
         User user = userService.createNewUser(registrationUserDto);
-        return ResponseEntity.ok(new UserDto(user.getId(), user.getUsername(), user.getEmail()));
+
+        UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
+        String token = jwtTokenUtils.generateToken(userDetails);
+
+        return ResponseEntity.ok(new RegistrtionResponse(user.getId(), user.getUsername(), token));
 
     }
 }

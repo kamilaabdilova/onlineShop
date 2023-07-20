@@ -53,4 +53,5 @@ public class BasketServiceImpl implements BasketService {
                 .orElseThrow(() -> new RecordNotFoundException("Корзины с таким id не существует!"));
         basketRepo.deleteById(basket.getId());
     }
+
 }

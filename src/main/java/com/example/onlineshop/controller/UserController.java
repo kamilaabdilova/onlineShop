@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.example.onlineshop.config.SwaggerConfig.BASKET;
+import static com.example.onlineshop.config.SwaggerConfig.USER;
+
 @AllArgsConstructor
-@Api(tags = BASKET)
+@Api(tags = USER)
 
 @RestController
 @RequestMapping("/user")
@@ -31,28 +33,24 @@ public class UserController {
         return userServiceImpl.findAllUser();
     }
     @DeleteMapping("/delete")
-    public void deleteBasket(@RequestParam Long id){
+    public void deleteUser(@RequestParam Long id){
         userServiceImpl.deleteUser(id);
 
-
+////кто угодно
 //    @GetMapping("/unsecured")
 //    public String unsecuredData(){
 //        return "Unsecured Data";
 //    }
-//
+////зарегист
 //    @GetMapping("/secured")
 //    public String securedData(){
 //        return "Secured Data";
 //    }
-//
+////админ
 //    @GetMapping("/admin")
 //    public String adminData(){
 //        return "Admin Data";
 //    }
-//
-//    @GetMapping("/info")
-//    public String userData(Principal principal){
-//        return principal.getName();
-//
-//    }
+
+
 }}
