@@ -1,6 +1,7 @@
 package com.example.onlineshop.dto;
 
 import com.example.onlineshop.entity.Image;
+import com.example.onlineshop.entity.Status;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +12,10 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductDto {
+public class ProductResponse {
     Long id;
     Double price;
-    Long imageId;
+    Image image;
     String description;
-    Long statusId;
+    Status status;
 }

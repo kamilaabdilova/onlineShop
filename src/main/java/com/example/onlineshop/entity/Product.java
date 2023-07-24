@@ -19,12 +19,13 @@ public class Product {
     Long id;
     @Column(name = "price", nullable = false)
     Double price;
-    @Column(name = "image")
-    String image;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    Image image;
     @Column(name = "description")
     String description;
-    @OneToOne()
-    @PrimaryKeyJoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     Status status;
 
 }

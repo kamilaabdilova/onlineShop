@@ -1,9 +1,8 @@
 package com.example.onlineshop.entity;
 
-
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -13,11 +12,13 @@ import javax.persistence.*;
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-public class Status {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(name = "status")
-    String status;
+    String name;
+    String type;
+    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "image")
+    private byte[] image;
 }
