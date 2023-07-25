@@ -18,11 +18,16 @@ public interface ProductMapper {
             expression = "java(productDto.getStatusId() == null ?" +
                     "null :" +
                     "new com.example.onlineshop.entity.Status(productDto.getStatusId(),null))")
+    @Mapping(target = "category",
+            expression = "java(productDto.getCategoryId() == null ?" +
+                    "null :" +
+                    "new com.example.onlineshop.entity.Category(productDto.getCategoryId(),null))")
     @Mapping(target = "image",
             expression = "java(productDto.getImageId() == null ?" +
                     "null :" +
                     "new com.example.onlineshop.entity.Image(productDto.getImageId(),null,null,null))")
     Product toEntity(ProductDto productDto);
+    @Mapping(target = "categoryId", source = "category.id")
 
     @Mapping(target = "statusId", source = "status.id")
     @Mapping(target = "imageId", source = "image.id")

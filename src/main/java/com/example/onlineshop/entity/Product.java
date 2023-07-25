@@ -27,5 +27,8 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     Status status;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    Category category;
 
 }

@@ -1,5 +1,6 @@
 package com.example.onlineshop.dto;
 
+import com.example.onlineshop.entity.Category;
 import com.example.onlineshop.entity.Image;
 import com.example.onlineshop.entity.Status;
 import lombok.AccessLevel;
@@ -18,4 +19,5 @@ public class ProductResponse {
     Image image;
     String description;
     Status status;
+    Category category;
 }
