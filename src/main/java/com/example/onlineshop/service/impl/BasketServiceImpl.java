@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -63,17 +66,63 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
-    public BasketDto getBasketById(Long id) {
-        Basket basket = this.basketRepo.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Корзины с таким id не существует!"));
-        return BasketMapper.INSTANCE.toDTO(basket);
+    public BasketDto deleteProduct(Long productId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = (String) authentication.getPrincipal();
+
+        User user = userRepo.findByUsername(login)
+                .orElseThrow(() -> new RuntimeException("Попробуйте перезайти в ваш аккаунт"));
+
+        Optional<Basket> oBasket = basketRepo.findById(user.getId());
+        if (oBasket.isEmpty())
+            return basketMapper.toDTO(new Basket(user.getId(), user, null));
+        Basket basket = oBasket.get();
+
+
+        Map<Long, Product> productMap = basket.getProductMap();
+
+        if (productMap == null)
+            return basketMapper.toDTO(basket);
+
+        if (productMap.containsKey(productId))
+            productMap.remove(productId);
+        else
+            return basketMapper.toDTO(basket);
+
+        basket.setProductList(productMap.values().stream().collect(Collectors.toList()));
+        Basket savedBasket = basketRepo.save(basket);
+
+        return basketMapper.toDTO(savedBasket);
     }
 
     @Override
-    public void deleteBasket(Long id) {
-        Basket basket = this.basketRepo.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Корзины с таким id не существует!"));
-        basketRepo.deleteById(basket.getUser().getId());
+    public BasketDto getBasket() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = (String) authentication.getPrincipal();
+
+        User user = userRepo.findByUsername(login)
+                .orElseThrow(() -> new RuntimeException("Попробуйте перезайти в ваш аккаунт"));
+
+        Basket basket = this.basketRepo.findById(user.getId())
+                .orElse(new Basket(user.getId(), user, null));
+
+        return basketMapper.toDTO(basket);
     }
 
+    @Override
+    public BasketDto clearBasket() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = (String) authentication.getPrincipal();
+
+        User user = userRepo.findByUsername(login)
+                .orElseThrow(() -> new RuntimeException("Попробуйте перезайти в ваш аккаунт"));
+
+        Basket basket = this.basketRepo.findById(user.getId())
+                .orElse(new Basket(user.getId(), user, null));
+
+        basket.setProductList(null);
+        Basket savedBasket = basketRepo.save(basket);
+
+        return basketMapper.toDTO(basket);
+    }
 }

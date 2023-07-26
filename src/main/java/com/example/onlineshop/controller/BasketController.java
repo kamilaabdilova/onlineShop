@@ -17,13 +17,23 @@ import static com.example.onlineshop.config.SwaggerConfig.BASKET;
 public class BasketController {
     private final BasketService basketService;
 
+    @GetMapping("/get")
+    public BasketDto getBasket() {
+        return basketService.getBasket();
+    }
+
     @PostMapping("/addProductToBasket")
     public BasketDto addProduct(@RequestParam Long productId) {
         return basketService.addProduct(productId);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteBasket(@PathVariable Long id) {
-        basketService.deleteBasket(id);
+    @PostMapping("/deleteProductInBasket")
+    public BasketDto deleteProduct(@RequestParam Long productId) {
+        return basketService.deleteProduct(productId);
+    }
+
+    @DeleteMapping("/clear")
+    public BasketDto deleteBasket() {
+        return basketService.clearBasket();
     }
 }

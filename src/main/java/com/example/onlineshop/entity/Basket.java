@@ -7,6 +7,8 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +25,11 @@ public class Basket {
     User user;
     @OneToMany(fetch = FetchType.EAGER)
     List<Product> productList;
+
+    public Map<Long, Product> getProductMap() {
+        Map<Long, Product> productMap = productList
+                .stream()
+                .collect(Collectors.toMap(Product::getId, p -> p));
+        return productMap;
+    }
 }

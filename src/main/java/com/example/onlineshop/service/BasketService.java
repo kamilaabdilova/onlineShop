@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface BasketService {
     BasketDto addProduct(Long productId);
-    BasketDto getBasketById(Long id);
-    void deleteBasket(Long id);
+    BasketDto deleteProduct(Long productId);
+    BasketDto clearBasket();
+    BasketDto getBasket();
 }
