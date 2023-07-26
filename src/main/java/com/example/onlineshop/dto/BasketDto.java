@@ -17,10 +17,5 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BasketDto {
     Long id;
-
-    User user;
-
-    List<Product> productList;
-
-    Order order;
+    List<ProductDto> productList;
 }

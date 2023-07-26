@@ -5,9 +5,7 @@ import com.example.onlineshop.dto.BasketDto;
 import java.util.List;
 
 public interface BasketService {
-    BasketDto saveBasket(BasketDto basketDto);
-    BasketDto updateBasket(BasketDto basketDto, long id);
+    BasketDto addProduct(Long productId);
     BasketDto getBasketById(Long id);
-    List<BasketDto> findAllBasket();
     void deleteBasket(Long id);
 }

@@ -1,7 +1,6 @@
 package com.example.onlineshop.entity;
 
 
-
 import lombok.*;
 
 import lombok.experimental.FieldDefaults;
@@ -15,21 +14,13 @@ import java.util.List;
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-
 public class Basket {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     Long id;
-    @OneToOne
-
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-
     User user;
-    @Column(name = "productList")
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     List<Product> productList;
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    Order order;
 }

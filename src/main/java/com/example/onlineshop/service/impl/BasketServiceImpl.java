@@ -2,37 +2,64 @@ package com.example.onlineshop.service.impl;
 
 import com.example.onlineshop.dto.BasketDto;
 import com.example.onlineshop.entity.Basket;
+import com.example.onlineshop.entity.Product;
+import com.example.onlineshop.entity.User;
 import com.example.onlineshop.exceptions.RecordNotFoundException;
 import com.example.onlineshop.mapper.BasketMapper;
+import com.example.onlineshop.mapper.ProductMapper;
 import com.example.onlineshop.repositories.BasketRepo;
+import com.example.onlineshop.repositories.ProductRepo;
+import com.example.onlineshop.repositories.UserRepo;
 import com.example.onlineshop.service.BasketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BasketServiceImpl implements BasketService {
     private final BasketRepo basketRepo;
+    private final UserRepo userRepo;
+    private final ProductRepo productRepo;
+    private final BasketMapper basketMapper;
 
     @Override
-    public BasketDto saveBasket(BasketDto basketDto) {
-        Basket basket = BasketMapper.INSTANCE.toEntity(basketDto);
-        try {
-            Basket basketSave = basketRepo.save(basket);
-            return BasketMapper.INSTANCE.toDTO(basketSave);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Не удалось сохранить корзину в базе!", e);
-        }
-    }
+    public BasketDto addProduct(Long productId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = (String) authentication.getPrincipal();
 
-    @Override
-    public BasketDto updateBasket(BasketDto basketDto, long id) {
-        Basket basket = this.basketRepo.findById(id)
-                        .orElseThrow(() -> new RecordNotFoundException("Корзины с таким id не существует!"));
-        basket.setUser(basketDto.getUser());
-        return BasketMapper.INSTANCE.toDTO(basket);
+        User user = userRepo.findByUsername(login)
+                .orElseThrow(() -> new RuntimeException("Попробуйте перезайти в ваш аккаунт"));
+
+        Basket basket = basketRepo.findById(user.getId())
+                .orElse(new Basket(user.getId(), user, null));
+
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+
+        List<Product> productList = basket.getProductList();
+        if (productList != null) {
+            boolean productExists = false;
+            for (Product searchProduct : productList) {
+                if (searchProduct.getId().equals(productId)) {
+                    productExists = true;
+                    break;
+                }
+            }
+            if (!productExists)
+                productList.add(product);
+        } else
+            productList = Arrays.asList(product);
+        basket.setProductList(productList);
+
+        Basket savedBasket = basketRepo.save(basket);
+
+        return basketMapper.toDTO(savedBasket);
     }
 
     @Override
@@ -43,15 +70,10 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
-    public List<BasketDto> findAllBasket() {
-        return BasketMapper.INSTANCE.toDTOList(basketRepo.findAll());
-    }
-
-    @Override
     public void deleteBasket(Long id) {
         Basket basket = this.basketRepo.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Корзины с таким id не существует!"));
-        basketRepo.deleteById(basket.getId());
+        basketRepo.deleteById(basket.getUser().getId());
     }
 
 }

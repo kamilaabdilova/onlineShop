@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Base64;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ImageMapper {
     ImageMapper INSTANCE = Mappers.getMapper(ImageMapper.class);
 

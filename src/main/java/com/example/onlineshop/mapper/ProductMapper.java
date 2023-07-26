@@ -6,9 +6,12 @@ import com.example.onlineshop.entity.Product;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Mapper(
+        componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
 public interface ProductMapper {
@@ -27,14 +30,16 @@ public interface ProductMapper {
                     "null :" +
                     "new com.example.onlineshop.entity.Image(productDto.getImageId(),null,null,null))")
     Product toEntity(ProductDto productDto);
-    @Mapping(target = "categoryId", source = "category.id")
 
+    @Mapping(target = "categoryId", source = "category.id")
     @Mapping(target = "statusId", source = "status.id")
     @Mapping(target = "imageId", source = "image.id")
     ProductDto toDTO(Product product);
+
     List<ProductDto> toDTOList(List<Product> productList);
 
     ProductResponse toResponse(Product product);
+
     List<ProductResponse> toResponseList(List<Product> productList);
 
     @Mapping(target = "status",
@@ -46,6 +51,5 @@ public interface ProductMapper {
                     "product.getImage() :" +
                     "new com.example.onlineshop.entity.Image(productDto.getImageId(),null,null,null))")
     void update(@MappingTarget Product product, ProductDto productDto);
-
 
 }

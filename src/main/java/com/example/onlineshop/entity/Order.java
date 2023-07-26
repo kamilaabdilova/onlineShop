@@ -7,6 +7,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,11 +21,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(name = "totalPrice")
-    Double totalPrice;
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    Basket basket;
+    BigDecimal totalPrice;
+    @ManyToMany
+    List<Product> productList;
     @PrimaryKeyJoinColumn
     @OneToOne
     User user;

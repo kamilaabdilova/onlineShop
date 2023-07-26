@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column(name = "price", nullable = false)
-    Double price;
+    BigDecimal price;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn
     Image image;
