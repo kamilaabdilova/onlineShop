@@ -6,14 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderDto {
     Long id;
-
-    Double totalPrice;
+    String address;
+    LocalDate date;
+    String phone;
+    Boolean payment;
 
 
 }

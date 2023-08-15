@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,6 +23,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     BigDecimal totalPrice;
+    String address;
+    LocalDate date;
+    String phone;
+    Boolean payment;
     @ManyToMany
     List<Product> productList;
     @PrimaryKeyJoinColumn

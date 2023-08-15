@@ -11,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class RegistrtionResponse {
     Long id;
     String userName;
-    String token;
+    String jwtToken;
 }
