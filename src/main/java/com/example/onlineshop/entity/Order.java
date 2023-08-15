@@ -2,7 +2,6 @@ package com.example.onlineshop.entity;
 
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import lombok.experimental.FieldDefaults;
@@ -11,8 +10,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,25 +24,14 @@ public class Order {
     Long id;
     BigDecimal totalPrice;
     String address;
-    @JsonFormat(pattern = "dd-MM-yyyy")
     LocalDate date;
     String phone;
     Boolean payment;
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     List<Product> productList;
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    @OneToOne
     User user;
-
-    public Order(Long id, User user, List<Product> productList) {
-        this.id = id;
-        this.user = user;
-        this.productList = productList;
-    }
-    public Map<Long, Product> getProductMap() {
-        Map<Long, Product> productMap = productList
-                .stream()
-                .collect(Collectors.toMap(Product::getId, p -> p));
-        return productMap;
-    }
+    @ElementCollection
+    List<Long> products;
 }
