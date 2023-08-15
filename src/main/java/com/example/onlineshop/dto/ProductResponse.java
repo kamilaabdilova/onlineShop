@@ -1,5 +1,6 @@
 package com.example.onlineshop.dto;
 
+import com.example.onlineshop.entity.Brand;
 import com.example.onlineshop.entity.Category;
 import com.example.onlineshop.entity.Image;
 import com.example.onlineshop.entity.Status;
@@ -20,4 +21,5 @@ public class ProductResponse {
     String description;
     Status status;
     Category category;
+    Brand brand;
 }

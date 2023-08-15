@@ -3,11 +3,12 @@ package com.example.onlineshop.mapper;
 import com.example.onlineshop.dto.ProductDto;
 import com.example.onlineshop.dto.ProductResponse;
 import com.example.onlineshop.entity.Product;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 @Mapper(

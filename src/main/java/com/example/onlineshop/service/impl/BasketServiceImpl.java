@@ -4,9 +4,7 @@ import com.example.onlineshop.dto.BasketDto;
 import com.example.onlineshop.entity.Basket;
 import com.example.onlineshop.entity.Product;
 import com.example.onlineshop.entity.User;
-import com.example.onlineshop.exceptions.RecordNotFoundException;
 import com.example.onlineshop.mapper.BasketMapper;
-import com.example.onlineshop.mapper.ProductMapper;
 import com.example.onlineshop.repositories.BasketRepo;
 import com.example.onlineshop.repositories.ProductRepo;
 import com.example.onlineshop.repositories.UserRepo;
@@ -14,7 +12,6 @@ import com.example.onlineshop.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

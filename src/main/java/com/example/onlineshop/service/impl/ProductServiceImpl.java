@@ -1,6 +1,5 @@
 package com.example.onlineshop.service.impl;
 
-import com.example.onlineshop.dto.ImageDto;
 import com.example.onlineshop.dto.ProductDto;
 import com.example.onlineshop.dto.ProductResponse;
 import com.example.onlineshop.entity.Product;
@@ -8,15 +7,12 @@ import com.example.onlineshop.exceptions.RecordNotFoundException;
 import com.example.onlineshop.mapper.ProductMapper;
 import com.example.onlineshop.repositories.ProductRepo;
 import com.example.onlineshop.service.ProductService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -73,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getOrderById(Long id) {
+    public ProductDto getProductById(Long id) {
         Product product = this.productRepo.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Продукта с таким id не существует!"));
         return ProductMapper.INSTANCE.toDTO(product);

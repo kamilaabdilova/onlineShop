@@ -1,8 +1,6 @@
 package com.example.onlineshop.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -31,5 +29,8 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     Category category;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    Brand brand;
 
 }

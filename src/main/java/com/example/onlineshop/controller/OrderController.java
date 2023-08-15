@@ -19,8 +19,8 @@ import static com.example.onlineshop.config.SwaggerConfig.ORDER;
 public class OrderController {
     private final OrderService orderService;
     @PostMapping("/save")
-    public OrderDto saveOrder(@RequestBody OrderDto orderDto){
-        return orderService.saveOrder(orderDto);
+    public OrderDto saveOrder(@RequestParam Long productId){
+        return orderService.saveOrder(productId);
     }
     @PutMapping("/update")
     public OrderDto updateOrder(@RequestBody OrderDto orderDto, @PathVariable long id){

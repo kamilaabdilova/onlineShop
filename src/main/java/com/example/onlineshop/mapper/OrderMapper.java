@@ -3,6 +3,7 @@ package com.example.onlineshop.mapper;
 import com.example.onlineshop.dto.OrderDto;
 import com.example.onlineshop.entity.Order;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface OrderMapper {
     Order toEntity(OrderDto orderDto);
     OrderDto toDTO(Order order);
     List<OrderDto> toDTOList(List<Order> orderList);
+    void update(@MappingTarget Order order,OrderDto orderDto);
 }

@@ -1,5 +1,6 @@
 package com.example.onlineshop.dto;
 
+import com.example.onlineshop.entity.Product;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +20,6 @@ public class OrderDto {
     LocalDate date;
     String phone;
     Boolean payment;
-
+    List<Product> productList;
 
 }

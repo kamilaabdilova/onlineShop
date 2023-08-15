@@ -1,12 +1,8 @@
 package com.example.onlineshop.mapper;
 
 import com.example.onlineshop.dto.BasketDto;
-import com.example.onlineshop.dto.ProductDto;
-import com.example.onlineshop.dto.ProductResponse;
 import com.example.onlineshop.entity.Basket;
-import com.example.onlineshop.entity.Product;
 import org.mapstruct.Mapper;
-import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

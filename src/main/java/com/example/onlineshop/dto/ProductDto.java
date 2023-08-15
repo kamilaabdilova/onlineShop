@@ -1,6 +1,5 @@
 package com.example.onlineshop.dto;
 
-import com.example.onlineshop.entity.Category;
 import com.example.onlineshop.entity.Image;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,5 +18,5 @@ public class ProductDto {
     String description;
     Long statusId;
     Long categoryId;
-
+    Long brandId;
 }
