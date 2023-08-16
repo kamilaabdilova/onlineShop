@@ -19,8 +19,8 @@ import static com.example.onlineshop.config.SwaggerConfig.ORDER;
 public class OrderController {
     private final OrderService orderService;
     @PostMapping("/save")
-    public OrderDto saveOrder(@RequestParam Long productId){
-        return orderService.saveOrder(productId);
+    public OrderDto saveOrder(@RequestBody OrderDto orderDto){
+        return orderService.saveOrder(orderDto);
     }
     @PutMapping("/update")
     public OrderDto updateOrder(@RequestBody OrderDto orderDto, @PathVariable long id){
@@ -30,6 +30,7 @@ public class OrderController {
     public List<OrderDto> findAll(){
         return orderService.findAllOrder();
     }
+
     @DeleteMapping("/delete")
     public void deleteBasket(@RequestParam Long id){
         orderService.deleteOrder(id);

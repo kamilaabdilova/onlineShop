@@ -5,7 +5,7 @@ import com.example.onlineshop.dto.OrderDto;
 import java.util.List;
 
 public interface OrderService {
-    OrderDto saveOrder(Long productId);
+    OrderDto saveOrder(OrderDto orderDto);
     OrderDto updateOrder(OrderDto orderDto, long id);
     List<OrderDto> findAllOrder();
     OrderDto getOrderById(Long id);

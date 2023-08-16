@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,4 +20,6 @@ public class OrderDto {
     String phone;
     Boolean payment;
     List<Long> products;
+    BigDecimal totalPrice;
+
 }
