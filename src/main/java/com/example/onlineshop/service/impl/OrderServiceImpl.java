@@ -10,6 +10,7 @@ import com.example.onlineshop.repositories.ProductRepo;
 import com.example.onlineshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,6 +21,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final OrderRepo orderRepo;
     private final ProductRepo productRepo;
+
     @Override
     public OrderDto saveOrder(OrderDto orderDto) {
 
@@ -60,6 +62,7 @@ public class OrderServiceImpl implements OrderService {
 //    }
 
     @Override
+    @Transactional
     public List<OrderDto> findAllOrder() {
         return OrderMapper.INSTANCE.toDTOList(orderRepo.findAll());
     }
@@ -77,6 +80,7 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow(() -> new RecordNotFoundException("Заказа с таким id не существует!"));
         orderRepo.deleteById(order.getId());
     }
+
     private BigDecimal getTotalPrice(List<Long> productIds) {
         BigDecimal total = BigDecimal.ZERO;
 
